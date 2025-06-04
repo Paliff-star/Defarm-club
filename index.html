@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,10 +23,10 @@
       text-align: center;
     }
     .container {
-      background-color: rgba(0, 0, 0, 0.6); /* затемнение */
+      background-color: rgba(0, 0, 0, 0.6);
       padding: 40px 20px;
       max-width: 400px;
-      width: 100%;
+      width: 90vw;
       border-radius: 12px;
     }
     h1 {
@@ -39,40 +38,67 @@
       margin-bottom: 20px;
     }
     .btn {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       width: 100%;
-      padding: 15px;
+      padding: 14px 20px;
       margin: 10px 0;
       border: none;
       border-radius: 8px;
-      font-size: 1.1em;
+      font-size: 1.05em;
       background: #22cc88;
       color: #fff;
       text-decoration: none;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.2s ease;
     }
     .btn:hover {
-      background: #1ca971;
+      background: #1aa26e;
+      transform: scale(1.02);
+    }
+    .btn img {
+      height: 20px;
+      width: 20px;
+    }
+    .btn.line {
+      background: #00c300;
+    }
+    .btn.line:hover {
+      background: #00a100;
     }
   </style>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V43GFJCW90"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-V43GFJCW90');
-</script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V43GFJCW90"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V43GFJCW90');
+  </script>
 </head>
+
 <body>
   <div class="container">
     <h1>Welcome to DeFarm Club</h1>
     <p>Find us, follow us, talk to us</p>
-    <a class="btn" href="https://maps.app.goo.gl/3eXMGzsRARbYCprf9" target="_blank">📍 Google Maps</a>
-    <a class="btn" href="https://www.instagram.com/defarm.shop" target="_blank">📸 Instagram</a>
-    <a class="btn" href="https://lin.ee/6IbtCwR" target="_blank">💬 LINE</a>
-    <a class="btn" href="tel:+66864129002">📞 Call us: +66 086 412 9002</a>
+
+    <a class="btn" href="https://maps.app.goo.gl/3eXMGzsRARbYCprf9" target="_blank">
+      📍 Find us on Google Maps
+    </a>
+
+    <a class="btn" href="https://www.instagram.com/defarm.shop" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/instagram-new.png" alt="Instagram"> Follow us on Instagram
+    </a>
+
+    <a class="btn line" href="https://lin.ee/6IbtCwR" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/line-me.png" alt="LINE"> 💬 Order via LINE
+    </a>
+
+    <a class="btn" href="tel:+66864129002">
+      📞 Call us: +66 086 412 9002
+    </a>
   </div>
 </body>
 </html>
