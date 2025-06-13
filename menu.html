@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DeFarm Club - Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 1em;
+    }
+    h1 {
+      text-align: center;
+      color: #9cff9c;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1em;
+    }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
+      margin: 0 5px;
+      border-radius: 5px;
+    }
+    .tab.active {
+      background: #9cff9c;
+      color: #000;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    table {
+      width: 100%;
+      color: #000;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌿 DeFarm Club - Menu</h1>
+  <div class="tabs">
+    <div class="tab active" data-tab="weed">Weed</div>
+    <div class="tab" data-tab="edibles">Edibles</div>
+    <div class="tab" data-tab="concentrates">Concentrates</div>
+  </div>
+
+  <div id="weed" class="tab-content active"><table id="tableWeed" class="display"></table></div>
+  <div id="edibles" class="tab-content"><table id="tableEdibles" class="display"></table></div>
+  <div id="concentrates" class="tab-content"><table id="tableConcentrates" class="display"></table></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    function loadCSV(sheetName, tableId) {
+      const csvUrl = `https://docs.google.com/spreadsheets/d/1H2Op4LQWyuzj38I-7ybWuchW7OhupHjG4z-cuyV3ylo/gviz/tq?tqx=out:csv&sheet=${sheetName}`;
+      Papa.parse(csvUrl, {
+        download: true,
+        header: true,
+        complete: function(results) {
+          new DataTable(document.getElementById(tableId), {
+            data: results.data,
+            columns: Object.keys(results.data[0]).map(key => ({ title: key, data: key })),
+            paging: false,
+            searching: true,
+            info: false,
+            order: [],
+            responsive: true
+          });
+        }
+      });
+    }
+
+    loadCSV("Weed", "tableWeed");
+    loadCSV("Edibles", "tableEdibles");
+    loadCSV("Concentrates", "tableConcentrates");
+  </script>
+</body>
+</html>
