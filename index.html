@@ -7,56 +7,58 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     #age-gate {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.age-gate-box {
-  background: #222;
-  padding: 30px 20px;
-  border-radius: 10px;
-  text-align: center;
-  color: #fff;
-  max-width: 320px;
-  box-shadow: 0 0 10px #000;
-}
+    .age-gate-box {
+      background: #222;
+      padding: 30px 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      max-width: 320px;
+      box-shadow: 0 0 10px #000;
+    }
 
-.age-gate-box h2 {
-  margin-bottom: 15px;
-  font-size: 1.5em;
-}
+    .age-gate-box h2 {
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
 
-.age-gate-box p {
-  margin-bottom: 25px;
-  color: #ccc;
-}
+    .age-gate-box p {
+      margin-bottom: 25px;
+      color: #ccc;
+    }
 
-.age-gate-buttons button {
-  margin: 5px;
-  padding: 10px 20px;
-  background: #22cc88;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background 0.3s ease;
-}
+    .age-gate-buttons button {
+      margin: 5px;
+      padding: 10px 20px;
+      background: #22cc88;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
 
-.age-gate-buttons button:hover {
-  background: #1aa26e;
-}
+    .age-gate-buttons button:hover {
+      background: #1aa26e;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       background: url('background.jpg') no-repeat center center fixed;
       background-size: cover;
@@ -68,6 +70,7 @@
       min-height: 100vh;
       text-align: center;
     }
+
     .container {
       background-color: rgba(0, 0, 0, 0.6);
       padding: 40px 20px;
@@ -75,14 +78,17 @@
       width: 90vw;
       border-radius: 12px;
     }
+
     h1 {
       font-size: 2em;
       margin-bottom: 10px;
     }
+
     p {
       color: #ccc;
       margin-bottom: 20px;
     }
+
     .btn {
       display: flex;
       align-items: center;
@@ -99,17 +105,21 @@
       text-decoration: none;
       transition: background 0.3s ease, transform 0.2s ease;
     }
+
     .btn:hover {
       background: #1aa26e;
       transform: scale(1.02);
     }
+
     .btn img {
       height: 20px;
       width: 20px;
     }
+
     .btn.line {
       background: #00c300;
     }
+
     .btn.line:hover {
       background: #00a100;
     }
@@ -123,21 +133,23 @@
     gtag('js', new Date());
     gtag('config', 'G-V43GFJCW90');
   </script>
+
 </head>
 
 <body>
-<div id="age-gate">
-  <div class="age-gate-overlay">
-    <div class="age-gate-box">
-      <h2>Welcome to DeFarm Club</h2>
-      <p>This website is intended for adults only.<br>Please confirm that you are 20 years or older.</p>
-      <div class="age-gate-buttons">
-        <button onclick="enterSite()">Yes, I am 20+</button>
-        <button onclick="denyAccess()">No</button>
+  <div id="age-gate">
+    <div class="age-gate-overlay">
+      <div class="age-gate-box">
+        <h2>Welcome to DeFarm Club</h2>
+        <p>This website is intended for adults only.<br>Please confirm that you are 20 years or older.</p>
+        <div class="age-gate-buttons">
+          <button onclick="enterSite()">Yes, I am 20+</button>
+          <button onclick="denyAccess()">No</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>  
+  </div>  
+
   <div class="container">
     <h1>Welcome to DeFarm Club</h1>
     <p>Find us, follow us, talk to us</p>
@@ -162,14 +174,22 @@
       📋 View Our Menu
     </a>
   </div>
-  <script>
-  function enterSite() {
-    document.getElementById('age-gate').style.display = 'none';
-  }
 
-  function denyAccess() {
-    window.location.href = "https://www.google.com";
-  }
-</script>
+  <script>
+    function enterSite() {
+      document.getElementById('age-gate').style.display = 'none';
+
+      const params = new URLSearchParams(window.location.search);
+      const src = params.get("src");
+
+      if (src === "flowers") {
+        window.location.href = "https://www.instagram.com/p/DJZHc9hPIZ5/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==";
+      }
+    }
+
+    function denyAccess() {
+      window.location.href = "https://www.google.com";
+    }
+  </script>
 </body>
 </html>
