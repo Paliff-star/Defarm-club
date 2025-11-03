@@ -6,9 +6,118 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>DeFarm — Flowers Menu</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --gold:#d4af37;
+      --black:#0a0a0a;
+      --bg-top:#0d0d0d;
+      --bg-bottom:#1b1b1b;
+      --bg-card-top:#d4af37;
+      --bg-card-bottom:#0a0a0a;
+      --text:#f1f1f1;
+      --muted:#c2c2c2;
+      --accent:#d4af37;
+      --radius:16px;
+      --shadow:0 6px 20px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--text);
+      background:linear-gradient(180deg,var(--bg-top) 0%, var(--bg-bottom) 100%);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;
+      line-height:1.5;
+    }
+    a{color:var(--accent); text-decoration:none}
+    .wrap{max-width:1100px; margin:0 auto; padding:24px}
+    header{padding:48px 0 8px}
+    .brand{display:flex; align-items:center; gap:14px}
+    .logo{width:44px; height:44px; border-radius:12px; background:var(--accent); color:#000; display:grid; place-items:center; box-shadow:var(--shadow); font-family:Sora, sans-serif; font-weight:700; letter-spacing:.5px;}
+    .title{font-family:Sora, sans-serif; font-size:28px; margin:0}
+    .tagline{margin:8px 0 0; color:var(--muted)}
+
+    .grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); padding:16px 24px 36px}
+
+    /* Card */
+    .card{
+      position:relative;
+      background:linear-gradient(180deg,var(--bg-card-top) 0%, var(--bg-card-bottom) 100%);
+      border-radius:var(--radius);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:transform .2s ease, box-shadow .2s ease;
+      box-shadow:var(--shadow);
+      min-height:420px;
+    }
+    .card:hover{transform:translateY(-4px); box-shadow:0 10px 28px rgba(0,0,0,.6);}
+
+    .thumb{width:100%; height:220px; object-fit:cover; display:block; background:#222; flex-shrink:0;}
+    .body{padding:14px 14px 16px; background:rgba(0,0,0,.55); border-top:1px solid rgba(255,255,255,.06); flex-grow:1; display:flex; flex-direction:column; justify-content:space-between;}
+
+    .pill{display:inline-block; background:rgba(212,175,55,.18); color:var(--accent); border-radius:999px; padding:2px 10px; font-size:12px; font-weight:700; letter-spacing:.3px}
+    .name{font-family:Sora, sans-serif; margin:10px 0 4px; font-size:18px; color:var(--accent)}
+    .meta, .effects, .price{margin:6px 0; color:var(--muted)}
+    .price{color:var(--accent); font-weight:700; margin-top:auto;}
+
+    .badge{position:absolute; top:10px; left:10px; background:var(--accent); color:#000; font-weight:800; font-size:12px; padding:4px 8px; border-radius:999px}
+
+    footer{background:#000; color:var(--muted); text-align:center; padding:20px; font-size:.9rem;}
+    @media (max-width:520px){ .title{font-size:22px} }
+  </style>
 </head>
 <body>
-  <h1>DeFarm — Flowers Menu</h1>
-  <p>This is your ready index.html file.</p>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">DF</div>
+        <div>
+          <h1 class="title">DeFarm — Flowers Menu</h1>
+          <p class="tagline">Explore our fine selection of cannabis flowers grown with care in Chiang Mai.</p>
+        </div>
+      </div>
+    </header>
+  </div>
+  <div id="cards" class="grid wrap" aria-live="polite"></div>
+
+  <script id="menu-data" type="application/json">[
+    {"id":"velvet-moon","name":"Velvet Moon","type":"Hybrid","flavors":["Floral","Sweet","Earthy"],"effects":["Relaxed","Creative","Happy"],"use":"Day","prices":{"pop":30,"medium":50,"large":60},"image":"imgs/1.png","isNew":true,"available":true},
+    {"id":"slc-gelato","name":"Super Lemon Cherry Gelato","type":"Hybrid","flavors":["Lemon","Cherry","Creamy"],"effects":["Uplifting","Relaxed","Euphoric"],"use":"Day","prices":{"pop":30,"medium":50,"large":60},"image":"https://images.unsplash.com/photo-1547499417-41e3376f4d62?q=80&w=1200&auto=format&fit=crop","isNew":false,"available":true},
+    {"id":"wild-thailand","name":"Wild Thailand","type":"Sativa","flavors":["Spicy","Woody","Citrus"],"effects":["Energetic","Focused","Uplifted"],"use":"Day","prices":{"pop":30,"medium":50,"large":60},"image":"https://images.unsplash.com/photo-1613376023561-7f3b3e8f31d9?q=80&w=1200&auto=format&fit=crop","isNew":false,"available":true},
+    {"id":"pink-kitty","name":"Pink Kitty","type":"Indica","flavors":["Berry","Sweet","Creamy"],"effects":["Relaxed","Tingly","Dreamy"],"use":"Night","prices":{"pop":30,"medium":50,"large":60},"image":"https://images.unsplash.com/photo-1604632959427-670b737aeca2?q=80&w=1200&auto=format&fit=crop","isNew":false,"available":true},
+    {"id":"acdc","name":"AC/DC","type":"CBD","flavors":["Citrus","Pine","Herbal"],"effects":["Calm","Clear","Soothing"],"use":"Any","prices":{"pop":30,"medium":50,"large":60},"image":"imgs/2.png","isNew":false,"available":true}
+  ]</script>
+
+  <script>
+    const container = document.getElementById('cards');
+    const data = JSON.parse(document.getElementById('menu-data').textContent);
+
+    const iconForUse = (u)=> u==="Day"?"☀️ Day":(u==="Night"?"🌙 Night":"☀️/🌙 Any");
+    const join = (arr, sep=' • ')=> Array.isArray(arr)?arr.filter(Boolean).slice(0,3).join(sep):'';
+
+    function cardHTML(item){
+      const price = item.prices?`Pop ${item.prices.pop}฿ · Medium ${item.prices.medium}฿ · Large ${item.prices.large}฿`:'';
+      return `
+      <article class="card" data-type="${item.type}">
+        ${item.isNew?'<span class="badge">NEW</span>':''}
+        <img class="thumb" src="${item.image||''}" alt="${item.name} flower" />
+        <div class="body">
+          <span class="pill">${item.type}</span>
+          <h3 class="name">${item.name}</h3>
+          <p class="meta">${join(item.flavors)}</p>
+          <p class="effects">${join(item.effects,' · ')} · ${iconForUse(item.use||'Any')}</p>
+          <p class="price">${price}</p>
+        </div>
+      </article>`;
+    }
+
+    function render(list){
+      container.innerHTML = list.filter(it=>it.available!==false).map(cardHTML).join('');
+    }
+
+    render(data);
+  </script>
+  <footer>⚖️ For informational purposes only · 20+ only · In accordance with Thai law</footer>
 </body>
 </html>
